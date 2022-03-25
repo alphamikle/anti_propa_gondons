@@ -1,0 +1,12 @@
+app:
+  title: A.P.G
+  fullTitle: Anti Propa Gondons
+about:
+  title: About
+  content: LARGE_EN_CONTENT
+main:
+  requestsInWork: Запросов в работе
+  totalRequests: Всего запросов
+  controls:
+    enable: Включить всё
+    disable: Выключить всё

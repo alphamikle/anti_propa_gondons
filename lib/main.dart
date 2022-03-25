@@ -1,65 +1,39 @@
+import 'package:anti_propa_gondons/domain/main/logic/main_screen_notifier.dart';
+import 'package:anti_propa_gondons/service/colors.dart';
+import 'package:anti_propa_gondons/service/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:yalo_locale/lib.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MyApp(
+      mainScreenNotifier: MainScreenNotifier(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({
+    required this.mainScreenNotifier,
+    Key? key,
+  }) : super(key: key);
+
+  final MainScreenNotifier mainScreenNotifier;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider.value(value: mainScreenNotifier),
+      ],
+      child: MaterialApp(
+        theme: ThemeData(primarySwatch: APGColors.uBlue),
+        localizationsDelegates: localizationsDelegates,
+        supportedLocales: supportedLocales,
+        onGenerateTitle: (BuildContext context) => Messages.of(context).app.title,
+        initialRoute: Routes.main,
+        routes: Routes.list,
       ),
     );
   }
