@@ -131,7 +131,7 @@ class MainScreenNotifier with ChangeNotifier {
   }
 
   Future<void> initialize() async {
-    final int threadsNumber = true ? 1 : Platform.numberOfProcessors;
+    final int threadsNumber = false ? 1 : Platform.numberOfProcessors;
     for (int i = 0; i < threadsNumber; i++) {
       final MainFrontend frontend = MainFrontend(
         id: i,
